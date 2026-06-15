@@ -1,0 +1,58 @@
+services:
+  # vamos falar da nossa aplicação podemos colocar app ou o nome widget(que é o nome da aplicação), é só um apelido
+  db:
+    # aqui a image já que não tem build(colocar um nome generico)
+    image: postgres:18
+    container_name: server-postgres
+    restart: unless-stopped
+    # a porta que o containers sobe o sistema,
+    # no caso é esse porta paseão do psotgre
+    ports:
+      - $POSTGRES_PORT:$POSTGRES_PORT
+    environment:
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_DB=$POSTGRES_DB
+    volumes:
+      # esse é o caminho que tem a estrutura do seu banco(dados)
+      - db:/var/lib/postgresql
+
+    # criando redes (opicional)
+    networks:
+      - server
+      - db
+
+  app:
+    # para conseguirmos chegar até o run precisamos do  build / e o . pois o docker-compose está na mesma hierarquia/ aqui e build que é o dockerFile
+    build: .
+    # aqui dizendo que o serviço app depende do dp para funcionar
+    depends_on:
+      - db
+    restart: unless-stopped
+    container_name: server
+    # precisamos da porta da nossa interface / vai ser da porta da interface para o nosso container
+    ports:
+      - 3000:3333
+    # aqui declaramos as envs vars que contem as variaveis de ambiente da nossa aplicação
+    # pegamos a variaveis da env
+    environment:
+      - CLOUDFLARE_ACCESS_KEY_ID=$CLOUDFLARE_ACCESS_KEY_ID
+      - CLOUDFLARE_SECRET_ACCESS_KEY=$CLOUDFLARE_SECRET_ACCESS_KEY
+      - CLOUDFLARE_BUCKET=$CLOUDFLARE_BUCKET
+      - CLOUDFLARE_ACCOUNT_ID=$CLOUDFLARE_ACCOUNT_ID
+      - CLOUDFLARE_PUBLIC_URL=$CLOUDFLARE_PUBLIC_URL
+        # criando redes (opicional)
+    networks:
+      - server
+
+# para volumes
+volumes:
+  db:
+
+# para criar as rede
+networks:
+  server:
+    # definindo driver, pode passar sem esse paramtro e fica o bridge como padrão
+    driver: bridge
+  db:
+    driver: bridge
