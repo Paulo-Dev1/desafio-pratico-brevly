@@ -13,7 +13,7 @@ type exportUploadsOutput = {
 }
 
 //aqui no caso o either espera o error e o sucesso o t e u
-export async function exportUploads(): Promise<Either<never, exportUploadsOutput>> {
+export async function exportShortenedurl(): Promise<Either<never, exportUploadsOutput>> {
 	
 
 	//ao inves de da um awiat que faria esse query executar
@@ -70,12 +70,13 @@ export async function exportUploads(): Promise<Either<never, exportUploadsOutput
         uploadToSorageStream
 		
 	)
+     const fileName = `${new Date().toISOString()}-uploads.csv`
+
 	//vou criar um metodo direto do node que é o pipeline
 	const uploadToSorage = uploadFileToStorage({
 	    contentType: 'text/csv',
 	    folder: 'dowloads',
-	    fileName: `${new Date().toISOString()}-uploads.csv`,
-
+	    fileName: fileName,
 	    //a gente não tem pois ainda não chegou ao fim
 	    contentStream: uploadToSorageStream
 	})
@@ -87,9 +88,12 @@ export async function exportUploads(): Promise<Either<never, exportUploadsOutput
 	    uploadToSorage
 	])
 
-    
-
-	//await convertToCSVpipeline
+    //fazer a inserção no banco
+	await db.insert(schema.generetedCsv).values({
+        name: fileName,
+		remoteKey: results[1].key,
+		remoteUrl: results[1].url,
+	})
 
 	//console.log(url)
 

@@ -10,6 +10,7 @@ import {
 } from 'fastify-type-provider-zod'
 import { createShortenedUrlRoute } from './routes/create-shortened-url'
 import { deleteShortenedUrlRoute } from './routes/delete-shortened-url'
+import { exportShortenedurlsRoute } from './routes/export-shortened-urls-csv'
 import { getShortenedUrlRoute } from './routes/get-shortened-url'
 import { listShortenedUrlsRoute } from './routes/list-shortened-urls'
 //import { env } from '@/env'
@@ -59,6 +60,7 @@ server.register(createShortenedUrlRoute)
 server.register(deleteShortenedUrlRoute)
 server.register(getShortenedUrlRoute)
 server.register(listShortenedUrlsRoute)
+server.register(exportShortenedurlsRoute)
 
 server.get('/openapi.json', () => server.swagger())
 
