@@ -6,8 +6,8 @@ export const generetedCsv = pgTable('genereted_csv', {
 		.primaryKey()
 		.$defaultFn(() => uuidv7()),
     name: text('name').notNull(),
-	remoteKey: text('remote_key').notNull().unique(),
-	remoteUrl: text('remote_url').notNull().unique(),
+	remoteKey: text('remote_key').notNull().unique(), //caminho do arquivo
+	remoteUrl: text('remote_url').notNull().unique(), //url do arquivo para acessar
 	createdAt: timestamp('created_at', { withTimezone: true })
 		.defaultNow()
 		.notNull(),

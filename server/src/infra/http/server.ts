@@ -1,3 +1,4 @@
+import fastifyCors from '@fastify/cors'
 import fastifyMultipart from '@fastify/multipart'
 import fastifySwagger from '@fastify/swagger'
 import scalarUI from '@scalar/fastify-api-reference'
@@ -7,6 +8,10 @@ import {
 	serializerCompiler,
 	validatorCompiler,
 } from 'fastify-type-provider-zod'
+import { createShortenedUrlRoute } from './routes/create-shortened-url'
+import { deleteShortenedUrlRoute } from './routes/delete-shortened-url'
+import { getShortenedUrlRoute } from './routes/get-shortened-url'
+import { listShortenedUrlsRoute } from './routes/list-shortened-urls'
 //import { env } from '@/env'
 import { transformSwaggerSchema } from './transform-swagger-shema'
 
@@ -47,6 +52,13 @@ server.register(fastifySwagger, {
 	// Converte os schemas (ex: Zod) para JSON Schema antes de serem usados
 	transform: transformSwaggerSchema,
 })
+
+server.register(fastifyCors, { origin: '*' })
+
+server.register(createShortenedUrlRoute)
+server.register(deleteShortenedUrlRoute)
+server.register(getShortenedUrlRoute)
+server.register(listShortenedUrlsRoute)
 
 server.get('/openapi.json', () => server.swagger())
 

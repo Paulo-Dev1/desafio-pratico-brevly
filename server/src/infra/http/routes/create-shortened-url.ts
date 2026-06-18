@@ -7,7 +7,7 @@ import { shortenedUrls } from '@/infra/db/schemas/shortened-url'
 export const createShortenedUrlRoute: FastifyPluginAsyncZod = async server => {
 	const bodySchema = z.object({
 		originalUrl: z.url(),
-		shortenedUrl: z.url(),
+		shortenedUrl: z.string(),
 	})
 
 	server.post(
@@ -30,7 +30,7 @@ export const createShortenedUrlRoute: FastifyPluginAsyncZod = async server => {
 			const existing = await db
 				.select()
 				.from(shortenedUrls)
-				.where(eq(shortenedUrls.originalUrl, body.originalUrl))
+				.where(eq(shortenedUrls.shortenedUrl, body.shortenedUrl))
 
 			if (existing.length > 0) {
 				return reply.status(400).send({ message: 'URL já existente' })

@@ -15,7 +15,7 @@
     "pretest": "npm run db:migrate:test",
     "pretest:watch": "npm run db:migrate:test",
     "db:studio:test": "dotenv -e .env.test -- drizzle-kit studio",
-    "build": "tsup src --format esm",
+    "build": "tsup",
     "start": "node dist/infra/http/server.js"
   },
   "keywords": [],

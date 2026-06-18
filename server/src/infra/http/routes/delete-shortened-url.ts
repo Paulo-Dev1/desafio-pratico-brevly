@@ -5,18 +5,17 @@ import { db } from '@/infra/db'
 import { shortenedUrls } from '@/infra/db/schemas/shortened-url'
 
 export const deleteShortenedUrlRoute: FastifyPluginAsyncZod = async server => {
-	const bodySchema = z.object({
-		originalUrl: z.url(),
-		shortenedUrl: z.url(),
+    const paramsSchema = z.object({
+		id: z.uuidv7(),
 	})
 
-	server.post(
-		'/urls',
+	server.delete(
+		'/urls/:id',
 		{
 			schema: {
 				summary: 'Delete shortened URL',
 				tags: ['URL'],
-				body: bodySchema,
+                params: paramsSchema,
 				response: {
 					200: z.object({ message: z.string() }),
 					404: z.object({ message: z.string() }),
@@ -25,7 +24,7 @@ export const deleteShortenedUrlRoute: FastifyPluginAsyncZod = async server => {
 		},
 
 		async (request, reply) => {
-			const { id } = request.params as { id: string }
+			const { id } = request.params
 
 			const url = await db.query.shortenedUrls.findFirst({
 				where: eq(shortenedUrls.id, id),

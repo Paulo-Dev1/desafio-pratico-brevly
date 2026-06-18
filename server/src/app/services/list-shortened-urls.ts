@@ -3,7 +3,7 @@ import { db } from '@/infra/db'
 import { schema } from '@/infra/db/schemas'
 import { type Either, makeRight } from '@/shared/either'
 
-//aqui temos que tipar nosso retorno
+
 type listShortenedUrlOutput = {
 	urls: {
 		id: string
@@ -14,12 +14,10 @@ type listShortenedUrlOutput = {
 	total: number
 }
 
-//aqui no caso o either espera o error e o sucesso o t e u
+
 export async function listShortenedUrls(): Promise<
 	Either<never, listShortenedUrlOutput>
 > {
-	//usando Promise.all posso usar duas query.
-	//toda query no drizzle volta um array
 	const [urls, [{ total }]] = await Promise.all([
 		db
 			.select({
@@ -29,7 +27,7 @@ export async function listShortenedUrls(): Promise<
 				acessCount: schema.shortenedUrls.acessCount,
 			})
 			.from(schema.shortenedUrls)
-			//where
+
 			//ordenação
 			.orderBy(fields => {
 				return desc(fields.id)
@@ -40,7 +38,6 @@ export async function listShortenedUrls(): Promise<
 			.from(schema.shortenedUrls),
 	])
 
-	//aqui para o sucesso right
-	//vamos devolver a url do arquivo baixado
+
 	return makeRight({ urls, total })
 }

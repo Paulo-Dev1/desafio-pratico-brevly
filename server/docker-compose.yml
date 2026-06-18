@@ -36,6 +36,7 @@ services:
     # aqui declaramos as envs vars que contem as variaveis de ambiente da nossa aplicação
     # pegamos a variaveis da env
     environment:
+      - DATABASE_URL=$DATABASE_URL
       - CLOUDFLARE_ACCESS_KEY_ID=$CLOUDFLARE_ACCESS_KEY_ID
       - CLOUDFLARE_SECRET_ACCESS_KEY=$CLOUDFLARE_SECRET_ACCESS_KEY
       - CLOUDFLARE_BUCKET=$CLOUDFLARE_BUCKET
