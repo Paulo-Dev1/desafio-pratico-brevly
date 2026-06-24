@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@tailwind utilities;
+@tailwind components;
+
+@theme {
+--font-sans: 'Inter', sans-serif;
+}

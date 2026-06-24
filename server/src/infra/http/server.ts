@@ -54,6 +54,8 @@ server.register(fastifySwagger, {
 	transform: transformSwaggerSchema,
 })
 
+server.register(fastifyCors, { origin: ['http://localhost:5173'] })
+
 server.register(fastifyCors, { origin: '*' })
 
 server.register(createShortenedUrlRoute)
