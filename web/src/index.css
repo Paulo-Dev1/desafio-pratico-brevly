@@ -3,5 +3,5 @@
 @tailwind components;
 
 @theme {
---font-sans: 'Inter', sans-serif;
+--font-sans: 'Open Sans', sans-serif;
 }
