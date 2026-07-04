@@ -1,11 +1,59 @@
-export function UrlShortened() {
-  return (
+import { useState } from 'react'
+import { saveUrl } from '../http/save-url'
+import { Button } from './ui/button'
+import { InputOriginal } from './ui/input-original-url'
+import { InputShortened } from './ui/input-shortened-url'
 
-    <div className="flex flex-col items-center justify-start gap-4 h-[340px] w-[380px] bg-white p-4 rounded-xl">
-      <p className="text-lg font-semibold text-gray-800">Your shortened URL:</p>
-      <input type="text" placeholder="Texto 1" className="w-full rounded border border-gray-300 px-3 py-2 text-gray-800" />
-      <input type="text" placeholder="Texto 2" className="w-full rounded border border-gray-300 px-3 py-2 text-gray-800" />
-      <p className="text-md text-gray-600"> texto</p>
-    </div> 
-    )
+interface Props {
+  onSuccess: () => void
+}
+
+export function UrlShortened({ onSuccess }: Props) {
+	const [originalUrl, setOriginalUrl] = useState('')
+	const [shortenedUrl, setShortenedUrl] = useState('')
+	const [statusMessage, setStatusMessage] = useState('')
+	const [isSaving, setIsSaving] = useState(false)
+
+	async function handleSave() {
+		if (!originalUrl.trim() || !shortenedUrl.trim()) {
+			setStatusMessage('Preencha as duas URLs antes de salvar.')
+			return
+		}
+
+		setIsSaving(true)
+		setStatusMessage('')
+
+		try {
+			await saveUrl({ originalUrl, shortenedUrl })
+             onSuccess()
+			setStatusMessage('URL salva com sucesso.')
+		} catch (error) {
+			setStatusMessage('Erro ao salvar a URL. Tente novamente.')
+		} finally {
+			setIsSaving(false)
+		}
+	}
+
+	return (
+		<div className="flex flex-col justify-start gap-4 h-[380px] w-[380px] bg-white p-8 rounded-xl">
+			<p className="text-lg text-gray-600 font-bold">Novo Link</p>
+			<InputOriginal
+				placeholder="www.exemplo.com.br"
+				value={originalUrl}
+				label="LINK ORIGINAL"
+				onChange={setOriginalUrl}
+			/>
+			<InputShortened
+				label="LINK ENCURTADO"
+				value={shortenedUrl}
+				onChange={setShortenedUrl}
+			/>
+			<Button onClick={handleSave} disabled={isSaving}>
+				Salvar URL
+			</Button>
+			{statusMessage ? (
+				<p className="text-sm text-gray-600">{statusMessage}</p>
+			) : null}
+		</div>
+	)
 }
