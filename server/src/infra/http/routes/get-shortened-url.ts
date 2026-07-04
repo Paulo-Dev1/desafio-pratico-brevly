@@ -7,18 +7,18 @@ import { shortenedUrls } from '@/infra/db/schemas/shortened-url'
 
 export const getShortenedUrlRoute: FastifyPluginAsyncZod = async server => {
 	const paramsSchema = z.object({
-		id: z.uuidv7(),
+		shortenedUrl: z.string(),
 	})
 
 	server.get(
-		'/urls/:id',
+		'/urls/:shortenedUrl',
 		{
 			schema: {
 				summary: 'Get shortened URL',
 				tags: ['URL'],
 				params: paramsSchema,
 				response: {
-					200: z.object({ shortenedUrl: z.string(), message: z.string() }),
+					200: z.object({ originalUrl: z.string(), message: z.string() }),
 					404: z.object({ message: z.string() }),
 					400: z.object({ message: z.string() }),
 				},
@@ -26,20 +26,20 @@ export const getShortenedUrlRoute: FastifyPluginAsyncZod = async server => {
 		},
 
 		async (request, reply) => {
-			const { id } = request.params
+			const { shortenedUrl } = request.params
 
 			const [url] = await db
 				.select({
-					shortenedUrl: shortenedUrls.shortenedUrl,
+					originalUrl: shortenedUrls.originalUrl,
 				})
 				.from(shortenedUrls)
-				.where(eq(shortenedUrls.id, id))
+				.where(eq(shortenedUrls.shortenedUrl, shortenedUrl))
 
 			if (!url) {
 				return reply.status(404).send({ message: 'URL não encontrada' })
 			}
 
-			const increment = await incrementAccessCount(id)
+			const increment = await incrementAccessCount(shortenedUrl)
 
 			if (increment.left) {
 				return reply.status(400).send({
@@ -50,7 +50,7 @@ export const getShortenedUrlRoute: FastifyPluginAsyncZod = async server => {
 			return reply
 				.status(200)
 				.send({
-					shortenedUrl: url.shortenedUrl,
+					originalUrl: url.originalUrl,
 					message: increment.right.message,
 				})
 		}

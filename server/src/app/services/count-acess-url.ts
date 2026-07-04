@@ -8,14 +8,14 @@ type incrementAccessCountOutput = {
 }
 
 export const incrementAccessCount = async (
-	id: string
+	shortenedUrl: string
 ): Promise<Either<never, incrementAccessCountOutput>> => {
 	await db
 		.update(schema.shortenedUrls)
 		.set({
 			acessCount: sql`${schema.shortenedUrls.acessCount} + 1`,
 		})
-		.where(eq(schema.shortenedUrls.id, id))
+		.where(eq(schema.shortenedUrls.shortenedUrl, shortenedUrl))
 
 	return makeRight({ message: 'success' })
 }

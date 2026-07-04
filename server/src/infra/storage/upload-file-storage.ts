@@ -40,7 +40,7 @@ export async function uploadFileToStorage(input: uploadFileToStorageInput) {
 	//para evitar duplicação preciso criar um nome unico de arquivo
 	const uniqueFileName = `${folder}${randomUUID()}-${sanitizedFileNameWithExtension}`
 
-	new Upload({
+	const upload = new Upload({
 		client: r2,
 		params: {
 			Key: uniqueFileName,
@@ -52,7 +52,7 @@ export async function uploadFileToStorage(input: uploadFileToStorageInput) {
 
 	//esse upload demora para fazer se eu quero aguardar do um await
 
-	//await upload.done()
+	await upload.done()
 
 	return {
 		key: uniqueFileName,
