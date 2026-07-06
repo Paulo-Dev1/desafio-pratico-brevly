@@ -119,6 +119,5 @@ docker compose up
 
 # Modelagem de Dados
 
-```md
 ![Modelagem de Dados](./server/docs/mermaid-diagram-2026-07-06-174057.png)
-```
+
