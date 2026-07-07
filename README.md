@@ -1,6 +1,6 @@
-# Prova Prática
+# Desafio Prático: Brev.ly
 
-Este repositório contém a implementação da prova prática, dividida em duas aplicações:
+Este repositório contém a implementação do desafio prático, dividida em duas aplicações:
 
 * **server/** → Back-end
 * **web/** → Front-end

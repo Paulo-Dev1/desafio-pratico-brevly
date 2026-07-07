@@ -5,10 +5,12 @@ import { db } from '@/infra/db'
 import { shortenedUrls } from '@/infra/db/schemas/shortened-url'
 
 export const createShortenedUrlRoute: FastifyPluginAsyncZod = async server => {
-	const bodySchema = z.object({
-		originalUrl: z.url(),
-		shortenedUrl: z.string(),
-	})
+    const bodySchema = z.object({
+        originalUrl: z.url(),
+        shortenedUrl: z.string()
+            .min(1)
+            .regex(/^[a-zA-Z0-9_-]+$/),
+    })
 
 	server.post(
 		'/urls',
