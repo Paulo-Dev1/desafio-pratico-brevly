@@ -1,19 +1,22 @@
-import { useState } from "react";
-import { ListUrls } from "./list-url";
-import { UrlShortened } from "./url-shortened";
+import { useState } from 'react'
+import { ListUrls } from './list-url'
+import { Logo } from './ui/logo'
+import { UrlShortened } from './url-shortened'
 
 export function Url() {
-    const [reload, setReload] = useState(0)
+	const [reload, setReload] = useState(0)
 
-function handleUrlCreated() {
-    setReload((prev) => prev + 1)
-  }
+	function handleUrlCreated() {
+		setReload(prev => prev + 1)
+	}
 
-
-    return(
-        <div className="flex gap-8">
-            <UrlShortened onSuccess={handleUrlCreated}/>
-            <ListUrls reload={reload}/>
-        </div>
-    )
+	return (
+		<div className="flex flex-col gap-6">
+			<Logo />
+			<div className="flex gap-8">
+				<UrlShortened onSuccess={handleUrlCreated} />
+			<ListUrls reload={reload} />
+			</div>
+		</div>
+	)
 }

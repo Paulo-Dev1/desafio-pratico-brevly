@@ -26,20 +26,23 @@ export function Redirect() {
 	}, [shortUrl])
 
 	return (
-		<div className="bg-white flex flex-col items-center justify-center gap-4">
-			<h1 className="text-2xl font-bold">Redirecionando...</h1>
-			<p className="text-gray-500">
-				O link será aberto automaticamente em alguns instantes.
-			</p>
-			<p className="text-gray-500">
-				Não foi redirecionado?
-				<a
-					className="text-blue-500 underline cursor-pointer"
-					href={window.location.origin}
-				>
-					Acesse aqui
-				</a>
-			</p>
+		<div className="bg-white flex flex-col items-center justify-center gap-4 w-[580px] h-[296px] rounded-lg">
+			<img src="/favicon.svg" alt="Logo" width={48} height={48} />
+			<h1 className="text-xl font-bold text-gray-600">Redirecionando...</h1>
+			<div className=" items-center justify-center flex flex-col gap-1">
+				<p className="text-gray-500 text-sm">
+					O link será aberto automaticamente em alguns instantes.
+				</p>
+				<p className="text-gray-500 text-sm">
+					Não foi redirecionado?
+					<a
+						className="text-blue-base text-sm underline cursor-pointer"
+						href={window.location.origin}
+					>
+						Acesse aqui
+					</a>
+				</p>
+			</div>
 		</div>
 	)
 }

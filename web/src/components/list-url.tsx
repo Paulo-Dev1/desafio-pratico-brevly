@@ -1,4 +1,4 @@
-import { CopyIcon, DownloadSimpleIcon, TrashIcon } from '@phosphor-icons/react'
+import { CopyIcon, DownloadSimpleIcon, LinkIcon, TrashIcon } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import { deleteUrl } from '../http/delete-url'
 import { exportUrls } from '../http/dowload-csv'
@@ -73,16 +73,16 @@ export function ListUrls({ reload }: Props) {
 	}
 
 	return (
-		<div className="flex flex-col justify-start gap-4 max-h-[800px] w-[580px] bg-white p-8 rounded-xl overflow-y-auto">
-			<div className="flex">
-				<p className="text-lg text-gray-600 font-bold flex-1">Novo Link</p>
+		<div className="flex flex-col justify-start gap-4 max-h-[234px] w-[580px] bg-white p-8 rounded-xl overflow-y-auto ">
+			<div className="flex items-center justify-between">
+				<p className="text-lg text-gray-600 font-bold">Novo Link</p>
 				<button
-					className="flex items-center justify-center gap-2 bg-zinc-300 rounded  px-4"
+					className="flex items-center justify-center gap-2 bg-gray-200 rounded px-5 py-1 cursor-pointer"
 					type="button"
 					onClick={handleDownloadCsv}
 				>
-					<DownloadSimpleIcon size={15} className="" />
-					<span className="text-xs font-semibold">Baixar CSV</span>
+					<DownloadSimpleIcon size={16} className=" text-gray-600" />
+					<span className="font-semibold text-gray-500">Baixar CSV</span>
 				</button>
 			</div>
 
@@ -129,8 +129,12 @@ export function ListUrls({ reload }: Props) {
 				))
 			) : (
 				<div>
-					<div className="w-full border-t border-gray-800"></div>
-					<p>Nenhuma URL encontrada.</p>
+					<div className="w-full border-t border-gray-200 flex flex-col items-center justify-center h-[117px] gap-2">
+                     <LinkIcon size={32} className="text-gray-400" /> 
+                    
+                    <p className="text-xs text-gray-500">AINDA NÂO EXISTEM LINKS CADASTRADOS</p>
+                    </div>
+					
 				</div>
 			)}
 		</div>
