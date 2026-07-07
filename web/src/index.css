@@ -1,19 +1,16 @@
 @import "tailwindcss";
-@tailwind utilities;
-@tailwind components;
 
 @theme {
+
 --font-sans: 'Open Sans', sans-serif;
-}
+  --color-blue-base: #2C46B1;
+  --color-blue-dark: #2C4091;
+  --color-gray-100: #F9F9FB;
+  --color-gray-200: #E4E6EC;
+  --color-gray-300: #CDCFD5;
+  --color-gray-400: #74798B;;
+  --color-gray-500: #4D505C;
+  --color-gray-600: #1F2025;
+  --color-danger: #EF4444;
 
-/* .blue-base{
-    background-color: #2C46B1;
 }
-
-.blue-dark{
-    background-color:#2C4091;
-}
-
-.white{
-    background-color:#2C4091;
-} */
