@@ -73,9 +73,9 @@ export function ListUrls({ reload }: Props) {
 	}
 
 	return (
-		<div className="flex flex-col justify-start gap-4 max-h-[234px] w-[580px] bg-white p-8 rounded-xl overflow-y-auto ">
+		<div className="flex flex-col justify-start gap-4  bg-white p-8 rounded-xl w-[580px] min-h-[234px] max-h-[800px]  overflow-y-auto ">
 			<div className="flex items-center justify-between">
-				<p className="text-lg text-gray-600 font-bold">Novo Link</p>
+				<p className="text-lg text-gray-600 font-bold">Meus Links</p>
 				<button
 					className="flex items-center justify-center gap-2 bg-gray-200 rounded px-5 py-1 cursor-pointer"
 					type="button"
@@ -89,11 +89,11 @@ export function ListUrls({ reload }: Props) {
 			{urls.length > 0 ? (
 				urls.map(url => (
 					<>
-						<div className="w-full border-t border-gray-800"></div>
+						<div className="w-full border-t border-gray-200"></div>
 						<div key={url.id} className="flex items-center w-full">
 							<div className="flex-1">
 								<button
-									className="text-blue-700 text-sm max-w-[350px] break-words"
+									className="text-blue-base text-sm font-semibold max-w-[350px] break-words cursor-pointer"
 									type="button"
 									onClick={() =>
 										handleRedirect(`${baseUrl}/${url.shortenedUrl}`)
@@ -101,16 +101,16 @@ export function ListUrls({ reload }: Props) {
 								>
 									{baseUrl}/{url.shortenedUrl}
 								</button>
-								<p className="text-sm max-w-[350px] break-words">
+								<p className="text-sm text-gray-500 max-w-[350px] break-words">
 									{url.originalUrl}
 								</p>
 							</div>
 							<div className="flex items-center justify-end gap-2">
-								<p className="text-sm">{url.acessCount} acessos</p>
+								<p className="text-sm  text-gray-500">{url.acessCount} acessos</p>
 
 								<button
 									type="button"
-									className=" bg-zinc-300 rounded p-2"
+									className=" bg-gray-200 rounded p-2 cursor-pointer"
 									onClick={() => handleCopy(`${baseUrl}/${url.shortenedUrl}`)}
 								>
 									<CopyIcon size={16} />
@@ -119,7 +119,7 @@ export function ListUrls({ reload }: Props) {
 								<button
 									type="button"
 									onClick={() => handleDelete(url.id)}
-									className=" bg-zinc-300 rounded p-2"
+									className=" bg-gray-200 rounded p-2 cursor-pointer"
 								>
 									<TrashIcon size={16} />
 								</button>

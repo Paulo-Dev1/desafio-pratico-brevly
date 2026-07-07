@@ -11,11 +11,11 @@ export function Url() {
 	}
 
 	return (
-		<div className="flex flex-col gap-6">
+		<div className="flex flex-col  gap-6">
 			<Logo />
-			<div className="flex gap-8">
+			<div className="flex flex-col items-start lg:flex-row gap-8">
 				<UrlShortened onSuccess={handleUrlCreated} />
-			<ListUrls reload={reload} />
+				<ListUrls reload={reload} />
 			</div>
 		</div>
 	)

@@ -44,6 +44,9 @@ export function UrlShortened({ onSuccess }: Props) {
 
 		try {
 			await saveUrl({ originalUrl, shortenedUrl })
+            // Limpa os erros
+            setOriginalUrlError('')
+            setShortenedUrlError('')
 			onSuccess()
 			setStatusMessage('URL salva com sucesso.')
 		} catch (error) {

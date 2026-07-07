@@ -26,7 +26,7 @@ export function Redirect() {
 	}, [shortUrl])
 
 	return (
-		<div className="bg-white flex flex-col items-center justify-center gap-4 w-[580px] h-[296px] rounded-lg">
+		<div className="bg-white flex flex-col items-center justify-center gap-4 w-[580px] h-[296px] rounded-lg p-10 text-center">
 			<img src="/favicon.svg" alt="Logo" width={48} height={48} />
 			<h1 className="text-xl font-bold text-gray-600">Redirecionando...</h1>
 			<div className=" items-center justify-center flex flex-col gap-1">
