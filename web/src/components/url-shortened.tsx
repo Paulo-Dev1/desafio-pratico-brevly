@@ -44,9 +44,9 @@ export function UrlShortened({ onSuccess }: Props) {
 
 		try {
 			await saveUrl({ originalUrl, shortenedUrl })
-            // Limpa os erros
-            setOriginalUrlError('')
-            setShortenedUrlError('')
+			// Limpa os erros
+			setOriginalUrlError('')
+			setShortenedUrlError('')
 			onSuccess()
 			setStatusMessage('URL salva com sucesso.')
 		} catch (error) {
@@ -57,15 +57,15 @@ export function UrlShortened({ onSuccess }: Props) {
 	}
 
 	return (
-		<div className="flex flex-col justify-start gap-4 h-[380px] w-[380px] bg-white p-8 rounded-xl">
-			<p className="text-lg text-gray-600 font-bold">Novo Link</p>
+		<div className="flex h-auto w-full max-w-[380px] flex-col justify-start gap-4 rounded-xl bg-white p-4 sm:p-6 md:p-8 lg:w-[380px]">
+			<p className="text-lg font-bold text-gray-600">Novo Link</p>
 			<InputOriginal
 				placeholder="www.exemplo.com.br"
 				value={originalUrl}
 				label="LINK ORIGINAL"
 				onChange={setOriginalUrl}
 				error={originalUrlError}
-                inputverific={1}
+				inputverific={1}
 			/>
 			<InputShortened
 				label="LINK ENCURTADO"

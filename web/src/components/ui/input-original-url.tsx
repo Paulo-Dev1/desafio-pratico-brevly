@@ -1,4 +1,4 @@
-import { WarningIcon } from "@phosphor-icons/react"
+import { WarningIcon } from '@phosphor-icons/react'
 
 export function InputOriginal({
 	label,
@@ -12,12 +12,8 @@ export function InputOriginal({
 	value: string
 	onChange: (value: string) => void
 	error?: string
-    inputverific:number
+	inputverific: number
 }) {
-
-    
-
-    
 	return (
 		<>
 			<div className="-mb-2">
@@ -28,7 +24,7 @@ export function InputOriginal({
 				placeholder={placeholder}
 				value={value}
 				onChange={e => onChange(e.target.value)}
-				className={`w-full rounded-lg border-1-5 px-3 py-2 text-gray-600 outline-none
+				className={`w-full min-w-0 rounded-lg border-1-5 px-3 py-2 text-sm text-gray-600 outline-none sm:text-base
                        ${error ? 'border-danger' : 'border-gray-300'}
 		        ${
 							error
@@ -36,7 +32,12 @@ export function InputOriginal({
 								: 'focus-within:border-blue-base'
 						}`}
 			/>
-            {error && <p className="flex text-xs text-gray-500 -mb-2 -mt-2"><WarningIcon size={16} className="text-danger mr-1" />{error}</p>}
+			{error && (
+				<p className="flex text-xs text-gray-500 -mb-2 -mt-2">
+					<WarningIcon size={16} className="text-danger mr-1" />
+					{error}
+				</p>
+			)}
 		</>
 	)
 }

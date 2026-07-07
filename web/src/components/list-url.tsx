@@ -1,4 +1,9 @@
-import { CopyIcon, DownloadSimpleIcon, LinkIcon, TrashIcon } from '@phosphor-icons/react'
+import {
+	CopyIcon,
+	DownloadSimpleIcon,
+	LinkIcon,
+	TrashIcon,
+} from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import { deleteUrl } from '../http/delete-url'
 import { exportUrls } from '../http/dowload-csv'
@@ -73,11 +78,11 @@ export function ListUrls({ reload }: Props) {
 	}
 
 	return (
-		<div className="flex flex-col justify-start gap-4  bg-white p-8 rounded-xl w-[580px] min-h-[234px] max-h-[800px]  overflow-y-auto ">
-			<div className="flex items-center justify-between">
-				<p className="text-lg text-gray-600 font-bold">Meus Links</p>
+		<div className="flex max-h-[800px] min-h-[234px] w-full min-w-[320px] max-w-[580px] flex-col justify-start gap-4 overflow-y-auto rounded-xl bg-white p-4 sm:p-6 md:p-8 lg:w-[380px] lg:min-w-[580px] lg:max-w-[380px]">
+			<div className="flex flex-col gap-3 flex-row items-center justify-between">
+				<p className="text-lg font-bold text-gray-600">Meus Links</p>
 				<button
-					className="flex items-center justify-center gap-2 bg-gray-200 rounded px-5 py-1 cursor-pointer"
+					className="flex cursor-pointer items-center justify-center gap-2 rounded bg-gray-200 px-4 py-2 sm:px-5"
 					type="button"
 					onClick={handleDownloadCsv}
 				>
@@ -93,7 +98,7 @@ export function ListUrls({ reload }: Props) {
 						<div key={url.id} className="flex items-center w-full">
 							<div className="flex-1">
 								<button
-									className="text-blue-base text-sm font-semibold max-w-[350px] break-words cursor-pointer"
+									className="max-w-full cursor-pointer break-all text-left text-sm font-semibold text-blue-base"
 									type="button"
 									onClick={() =>
 										handleRedirect(`${baseUrl}/${url.shortenedUrl}`)
@@ -101,12 +106,14 @@ export function ListUrls({ reload }: Props) {
 								>
 									{baseUrl}/{url.shortenedUrl}
 								</button>
-								<p className="text-sm text-gray-500 max-w-[350px] break-words">
+								<p className="max-w-full break-all text-sm text-gray-500">
 									{url.originalUrl}
 								</p>
 							</div>
-							<div className="flex items-center justify-end gap-2">
-								<p className="text-sm  text-gray-500">{url.acessCount} acessos</p>
+							<div className="flex flex-wrap items-center justify-start gap-2 sm:justify-end">
+								<p className="text-sm whitespace-nowrap text-gray-500">
+									{url.acessCount} acessos
+								</p>
 
 								<button
 									type="button"
@@ -130,11 +137,12 @@ export function ListUrls({ reload }: Props) {
 			) : (
 				<div>
 					<div className="w-full border-t border-gray-200 flex flex-col items-center justify-center h-[117px] gap-2">
-                     <LinkIcon size={32} className="text-gray-400" /> 
-                    
-                    <p className="text-xs text-gray-500">AINDA NÂO EXISTEM LINKS CADASTRADOS</p>
-                    </div>
-					
+						<LinkIcon size={32} className="text-gray-400" />
+
+						<p className="text-xs text-gray-500">
+							AINDA NÂO EXISTEM LINKS CADASTRADOS
+						</p>
+					</div>
 				</div>
 			)}
 		</div>

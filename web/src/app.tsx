@@ -5,7 +5,7 @@ import { Url } from './components/url'
 
 export function App() {
 	return (
-		<main className="h-dvh flex flex-col items-center justify-center p-10 c bg-[#E4E6EC]">
+		<main className="h-dvh flex flex-col items-center p-10 bg-gray-200">
 			<Routes>
 				<Route path="/*" element={<Url />} />
 				<Route path="/:shortenedUrl" element={<Redirect />} />
