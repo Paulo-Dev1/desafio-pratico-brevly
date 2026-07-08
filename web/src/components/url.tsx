@@ -11,7 +11,7 @@ export function Url() {
 	}
 
 	return (
-		<div className="flex flex-col  gap-6 p-10">
+		<div className="flex flex-col  gap-6 p-10  bg-gray-200">
 			<Logo />
 			<div className="flex flex-col gap-6 lg:flex-row lg:justify-center lg:items-start">
 				<UrlShortened onSuccess={handleUrlCreated} />
