@@ -16,7 +16,7 @@ import { listShortenedUrlsRoute } from './routes/list-shortened-urls'
 //import { env } from '@/env'
 import { transformSwaggerSchema } from './transform-swagger-shema'
 
-const server = fastify()
+export const server = fastify()
 
 server.setValidatorCompiler(validatorCompiler)
 server.setSerializerCompiler(serializerCompiler)
